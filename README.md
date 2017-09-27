@@ -3,7 +3,7 @@ Transform customer relationships, and your business, using the latest in mobile 
 
 # Pre-Requisites
 * SalesForce Case Module
-* SalesForce Custome Object - Engage
+* SalesForce Custom Object - Engage
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
 # Files
@@ -103,7 +103,7 @@ System.debug(' Response: ' + res.getBody());
 <img src="media/engageobjectdetail1.png">
 </kbd>
 
-2) Triggers - Create a trigger and call it xMattersEngage.  Copy the following code.  The second line references a Webhook that has not been created yet.  You will update this line in step 7 of the xMatters Setup instructions.
+2) Triggers - Create a trigger and call it xMattersEngage.  Copy the following code.  The second line references a Webhook that has not been created yet.  You will update this line in step 5 of the xMatters Setup instructions.
 
 ```
 trigger xMattersEngage on Engage__c (after insert) {
@@ -340,6 +340,96 @@ function getUserId( userName ) {
 <kbd>
 <img src="media/xmattersrecipients.png">
 </kbd>
+
+5) Optional - Create an Inbound IB (Inbound Engage) script using the following code or the code from the SalesForce-Inbound_Engage.js file.  Select URL authentication in the properties.  Copy the URL and use it for step 5 in the SalesForce setup section.
+
+<kbd>
+<img src="media/Inbound_Engage.png">
+</kbd>
+
+```
+/*
+Inbound integration used to engage additonal groups and send an update..
+*/
+
+
+var xmattersLibrary = require('xmatters_utility');
+var slackLibrary = require('slack_utility');
+
+var data = JSON.parse(request.body);
+
+var datan = '{' + '"properties":' + JSON.stringify(data) + '}';
+var json = JSON.parse(datan);
+console.log(JSON.stringify(json));
+
+arr = data.recipients.split(';');
+var recipients = [];
+
+for (var i = 0, len = arr.length; i < len; i++) {
+  recipients.push({'targetName': arr[i]});  //Syntax to add a user
+}
+json.recipients = recipients;
+
+var type = data.Type;
+console.log("Collaboration Type:" + type);
+if (type.toLowerCase() == "update"){
+    path = '/reapi/2015-04-01/forms/2eb9b3e3-72f9-432d-9551-08e3c6e5256f/triggers';
+    xmattersLibrary.xmattersEvent(path, json);
+}
+else if (type.toLowerCase() == "conference call"){
+    path = '/reapi/2015-04-01/forms/69c391fe-b599-42df-8f3f-6813ac0d5c4c/triggers';
+    xmattersLibrary.xmattersEvent(path, json);
+}
+```
+
+6) Optional - Create a Shared Library (xmattersUtility) using the following code or the code in the xmattersUtility.js file.
+
+```
+/*
+ Share Library that retrieves an xMatters user id and checks to see if an xMatters event 
+ already exists.
+ */
+
+
+
+exports.getuserID = function(fullname) {
+    console.log("Get xMatters Userid");
+    
+    //var i = fullname.indexOf(" ");
+    //var firstname = fullname.substring(0, i);
+    //var lastname = fullname.substring(i + 1);
+    var name = fullname.replace(" ", '+');
+    console.log("Name - " + name);
+    var request = http.request({ 
+         "endpoint": "xMatters2",
+         "path": "/api/xm/1/people?search=" + name,
+         "method": "GET"
+    });
+
+    var response = request.write();
+    if (response.statusCode == 200 ) {
+       json = JSON.parse(response.body);
+       console.log( "Retrieved  " + json.count + " of " + json.total + " people" );
+    }
+    return json.data[0].targetName;
+};
+
+exports.xmattersEvent = function(path, payload) {
+    console.log("xMatters Event:" + path + " - " + JSON.stringify(payload));
+    
+    var request = http.request({ 
+         "endpoint": "xMatters2",
+         "path": path,
+         "method": "POST"
+    });
+
+    var response = request.write(payload);
+    if (response.statusCode == 200 ) {
+       json = JSON.parse(response.body);
+       console.log( "Retrieved  " + json.count + " of " + json.total + " people" );
+    }
+}
+```
 
    
 # Testing
