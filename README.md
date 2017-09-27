@@ -320,17 +320,7 @@ function getUserId( userName ) {
 
 }
 ```
-6. Add Recipients/Groups to the xMatters New Case Layout.  Login to xMatters with Developer rights.  Click on the Developer tab.  In the SalesForce Communication Plan navigate to the New Case Form.
 
-<kbd>
-<img src="media/xmattersform.png">
-</kbd>
-
-* In the New Case Form naviagete to the Layout view and add Recipeients.
-
-<kbd>
-<img src="media/xmattersrecipients.png">
-</kbd>
 
 5) Optional - Create an Inbound IB (Inbound Engage) script using the following code or the code from the SalesForce-Inbound_Engage.js file.  Select URL authentication in the properties.  Copy the URL and use it for step 5 in the SalesForce setup section.
 
@@ -421,8 +411,19 @@ exports.xmattersEvent = function(path, payload) {
     }
 }
 ```
+7. Add Recipients/Groups to the xMatters New Case Layout.  Login to xMatters with Developer rights.  Click on the Developer tab.  In the SalesForce Communication Plan navigate to the New Case Form.
 
-7. Update xMatters Endpoints - In Integration Builder, Configure your Salesforce Endpoint  
+<kbd>
+<img src="media/xmattersform.png">
+</kbd>
+
+* In the New Case Form naviagete to the Layout view and add Recipeients.
+
+<kbd>
+<img src="media/xmattersrecipients.png">
+</kbd>
+
+8. Update xMatters Endpoints - In Integration Builder, Configure your Salesforce Endpoint  
 *NOTE: if you're using a relaxed IP policy, you'll need to add your API token to the end of your Password. For the following information see the SalesForce Setup steps above.
 * At the top navigation bar in SalesForce go to your name > Setup > Personal Setup > My Personal Information > Reset My Security Token.
 * If your password is mypassword, and your security token is XXXXXXXXXX, then you must enter mypasswordXXXXXXXXXX in the xMatters Endpoint to authenticate correctly.
@@ -432,7 +433,7 @@ exports.xmattersEvent = function(path, payload) {
 <img src="media/xmattersendpoint.png">
 </kbd>
 
-8. Update the SalesForce Engage Trigger and button with the Inbound_Engage URL.  Select URL authentication in the properties.  Copy the URL and use it for step 5 in the SalesForce setup section.
+9. Update the SalesForce Engage Trigger and button with the Inbound_Engage URL.  Select URL authentication in the properties.  Copy the URL and use it for step 5 in the SalesForce setup section.
 
 <kbd>
 <img src="media/Inbound_Engage.png">
