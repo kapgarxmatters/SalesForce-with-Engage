@@ -1,8 +1,9 @@
 # SalesForce Service
-Transform customer relationships, and your business, using the latest in mobile and data technology to deliver the most personalized customer experience ever — every time, and anywhere. This document instructs how to setup an integration between xMatters and SalesForce Case Management.  When a case is created, SalesForce reaches into xMatters to figure out who is on call for assignment of the case.
+Transform customer relationships, and your business, using the latest in mobile and data technology to deliver the most personalized customer experience ever — every time, and anywhere. This document instructs how to setup an integration between xMatters and SalesForce Case Management.  When a case is created, SalesForce reaches into xMatters to figure out who is on call for assignment of the case.  The Engage button in the case allows users to invite additional on call engineers to a call for further collaboration.  The Engage button can also be used to send out updates to various groups or xMatters subscriptions.
 
 # Pre-Requisites
 * SalesForce Case Module
+* SalesForce Custome Object - Engage
 * xMatters account - If you don't have one, [get one](https://www.xmatters.com)!
 
 # Files
@@ -14,7 +15,9 @@ Transform customer relationships, and your business, using the latest in mobile 
 * [Salesforce.zip](Salesforce.zip) - The comm plan (if needed) that has all the cool scripts and email format and such. 
 
 # How it works
-When a new SalesForce Case is submitted, SalesForce pushes the information into xMatters.  xMatters kicks off an event and sends the SalesForce case information to the engineer on call.  That engineer has the ability to respond in the xMatters notification.  By accepting the assignment in the xMatters notification, this updates the SalesForce Assignment field.
+When a new SalesForce Case is submitted, SalesForce pushes the information into xMatters.  xMatters kicks off an event and sends the SalesForce case information to the engineer on call.  That engineer has the ability to respond in the xMatters notification.  By accepting the assignment in the xMatters notification, this updates the SalesForce Assignment field.  
+
+After slecting the Engage button in a Case, the user will be presented with the options of who to invite and the type of way to engage (Conference Call or Update).  After submitting the Engage form, xMatters kicks off an event and sends the SalesForce information to the engineers on call in the groups selected.
 
 # Installation
 
@@ -78,7 +81,13 @@ System.debug(' Response: ' + res.getBody());
 }
 }
 ```
+ 4. In SalesForce, in the Setup Navigation select Create -> Objects.  Create a New Object and label it Engage.
  
+ <kbd>
+<img src="media/engageobject.png">
+</kbd>
+
+5. 
 
 ## xMatters set up
 1. Import the Salesforce Communication Plan (See Salesforce.zip in files above).  If you use the attached Salesforce Communication Plan you can skip steps 2-4.
