@@ -412,7 +412,6 @@ exports.xmattersEvent = function(path, payload) {
 }
 ```
 
-
 7. The Inbound_Engage script references two endpoints - two xMatters' forms (Engage and Engage with Conference Call).  These endpoints needed to be updated.  They are referenced in step 5: 
 
 path = '/reapi/2015-04-01/forms/2eb9b3e3-72f9-432d-9551-08e3c6e5256f/triggers';
@@ -420,7 +419,7 @@ path = '/reapi/2015-04-01/forms/2eb9b3e3-72f9-432d-9551-08e3c6e5256f/triggers';
 The actual values can be found from the Engage and Engage with Conference Call Form properties menu.  Copy the value and replace within the script.
 
 <kbd>
-<img src="media/EngageMenu.png">
+<img src="media/Engagemenu.png">
 </kbd>
 
 <kbd>
