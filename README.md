@@ -87,7 +87,28 @@ System.debug(' Response: ' + res.getBody());
 <img src="media/engageobject.png">
 </kbd>
 
-5. 
+5. Add the detail to the Engage Object: 
+ 1) Custom fields: 
+   a) Account_Name
+   b) CaseID
+   c) Collaboration - Values
+      1) Conf Call
+      2) Update
+      3) Slack (Setup of this functionality is not described in this documentation.)
+   d) Comments
+   e) Recipients - Values
+      1) List of Groups that match xMatters Groups.
+      
+<kbd>
+<img src="media/engageobjectdetail1.png">
+</kbd>
+
+2) Triggers
+
+3) Page Layouts
+
+4) Buttons
+      
 
 ## xMatters set up
 1. Import the Salesforce Communication Plan (See Salesforce.zip in files above).  If you use the attached Salesforce Communication Plan you can skip steps 2-4.
