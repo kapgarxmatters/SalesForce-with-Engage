@@ -130,10 +130,40 @@ trigger xMattersEngage on Engage__c (after insert) {
 <img src="media/xMattersEngageTrigger.png">
 </kbd>
 
-3) Page Layouts
+3) Page Layouts - Create a simple layout that uses the custom fields and the submit buttion.
+<kbd>
+<img src="media/engagelayout1.png">
+</kbd>
+<kbd>
+<img src="media/engagelayout2.png">
+</kbd>
 
-4) Buttons
-      
+4) Buttons - Create a Submit button with the following properties.  Copy the following code into the JavaScript editor.
+
+<kbd>
+<img src="media/engagesubmitbutton.png">
+</kbd>
+
+```
+{!REQUIRESCRIPT ("/soap/ajax/13.0/connection.js")};
+{!REQUIRESCRIPT("/soap/ajax/30.0/apex.js")};
+
+caseid = '"Case ID":' + '"' + "{!Case.CaseNumber}" + '"';
+contact = '"Contact":' + '"' + "{!Case.Contact}" + '"';
+subject = '"Subject":' + '"' + "{!Case.Subject}" + '"';
+priority = '"Priority":' + '"' + "{!Case.Priority}" + '"';
+status = '"Status":' + '"' + "{!Case.Status}" + '"';
+accountid = '"Account ID":' + '"' + "{!Case.AccountId}" + '"';
+recordid = '"ID":' + '"' + "{!Case.Id}" + '"';
+accountname = '"Account Name":' + '"' + "{!Case.Account}" + '"';
+description = '"Description":' + '"' + "{!Case.Description}" + '"';
+payload = '{' + contact + ',' + subject + ',' + recordid + ',' + caseid + ',' + description + ',' + priority + ',' + accountname + ',' + accountid + ',' + status + '}';
+
+endpoint = 'https://salesdemo.cs1.xmatters.com/api/integration/1/functions/dbda74c0-69db-4715-bb77-1fde1fa60c29/triggers';
+
+sforce.apex.execute("xMattersreq","xRESTCall",{endpoint:endpoint, payload:payload});
+```
+
 
 ## xMatters set up
 1. Import the Salesforce Communication Plan (See Salesforce.zip in files above).  If you use the attached Salesforce Communication Plan you can skip steps 2-4.
