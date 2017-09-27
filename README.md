@@ -165,6 +165,7 @@ sforce.apex.execute("xMattersreq","xRESTCall",{endpoint:endpoint, payload:payloa
 ```
 5) Customize Case Object 
   1) Create an Engage Button with the following properties.
+  
 <kbd>
 <img src="media/Engagebutton.png">
 </kbd>
@@ -173,7 +174,7 @@ sforce.apex.execute("xMattersreq","xRESTCall",{endpoint:endpoint, payload:payloa
 /a01/e?01I0V000002N1Y1&CF00N0V000009BmuM={!Case.CaseNumber}&00N0V000009BmuW={!Case.Account}
 ```
 
-   2) Add the Engage button to a Case layout.
+ 2) Add the Engage button to a Case layout.
    
 <kbd>
 <img src="media/Caselayout.png">
