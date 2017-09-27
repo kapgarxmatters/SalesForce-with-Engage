@@ -107,7 +107,7 @@ System.debug(' Response: ' + res.getBody());
 
 ```
 trigger xMattersEngage on Engage__c (after insert) {
-    String endpoint = 'https://advisors.na5.xmatters.com/api/integration/1/functions/225fcbe0-f0b5-4e74-bdbd-0368fc03cdaf/triggers?apiKey=d742ef03-dc72-419c-acef-62d76da27750';
+    String endpoint = 'https://[xmatters instance]/api/integration/1/functions/225fcbe0-f0b5-4e74-bdbd-0368fc03cdaf/triggers?apiKey=d742ef03-dc72-419c-acef-62d76da27750';
     String caseid = '"Case ID":' + '"' + Trigger.New[0].CaseID__c + '"';
     String comment = '"Comment":' + '"' + Trigger.New[0].Comments__c + '"';
     string accountname = '"Account Name":' + '"' + Trigger.New[0].Account_Name__c + '"';
@@ -159,10 +159,31 @@ accountname = '"Account Name":' + '"' + "{!Case.Account}" + '"';
 description = '"Description":' + '"' + "{!Case.Description}" + '"';
 payload = '{' + contact + ',' + subject + ',' + recordid + ',' + caseid + ',' + description + ',' + priority + ',' + accountname + ',' + accountid + ',' + status + '}';
 
-endpoint = 'https://salesdemo.cs1.xmatters.com/api/integration/1/functions/dbda74c0-69db-4715-bb77-1fde1fa60c29/triggers';
+endpoint = 'https://[xmatters instance]/api/integration/1/functions/dbda74c0-69db-4715-bb77-1fde1fa60c29/triggers';
 
 sforce.apex.execute("xMattersreq","xRESTCall",{endpoint:endpoint, payload:payload});
 ```
+5) Customize Case Object 
+  1) Create an Engage Button with the following properties.
+<kbd>
+<img src="media/Engagebutton.png">
+</kbd>
+
+```
+/a01/e?01I0V000002N1Y1&CF00N0V000009BmuM={!Case.CaseNumber}&00N0V000009BmuW={!Case.Account}
+```
+
+   2) Add the Engage button to a Case layout.
+   
+<kbd>
+<img src="media/Caselayout.png">
+</kbd>
+  
+6) Test the new Engage Functionality.  Within a Case, select the Engage button.  
+
+<kbd>
+<img src="media/Engage.png">
+</kbd>
 
 
 ## xMatters set up
