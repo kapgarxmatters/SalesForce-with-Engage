@@ -447,6 +447,8 @@ exports.xmattersEvent = function(path, payload) {
 3. Automatically, an event is created in xMatters with the SalesForce case  information.  The on call user in the xMatters SalesForce group is notified.  This is all logged back into SalesForce Case Comments.
 4. Have the on call user respond with "Accept the Assignment" in the xMatters notification.
 5. This updates SalesForce Assigned to Field and Case Comments.  If when you created the case in SalesForce it automatically assigned you the Assignment field you will not notice the update to the Assignment field.  Have a different user create the case then is on call to test out the functionality.  
+6. In that case select the Engage button.  Select the groups (make sure they exist in xMatters), select the collaboration item add a comment and select submit.
+7. A new xMatters event is created notifying the groups.  
 
 # Troubleshooting
 Check the SalesForce developer console logging and xMatters Activity streams for the Inbound and Outbound integrations.
