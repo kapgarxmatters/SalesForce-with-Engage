@@ -139,7 +139,7 @@ trigger xMattersEngage on Engage__c (after insert) {
 <img src="media/engagelayout2.png">
 </kbd>
 
-4) Buttons - Create a Submit button with the following properties.  Copy the following code into the JavaScript editor.
+4) Buttons - Create a Submit button with the following properties.  Copy the following code into the JavaScript editor.  The endpoint variable references a Webhook that has not been created yet.  You will update this line in step 5 of the xMatters Setup instructions.
 
 <kbd>
 <img src="media/engagesubmitbutton.png">
@@ -165,7 +165,7 @@ endpoint = 'https://[xmatters instance]/api/integration/1/functions/dbda74c0-69d
 sforce.apex.execute("xMattersreq","xRESTCall",{endpoint:endpoint, payload:payload});
 ```
 5) Customize Case Object 
-  1) Create an Engage Button with the following properties.
+ 1) Create an Engage Button with the following properties.
   
 <kbd>
 <img src="media/Engagebutton.png">
