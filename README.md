@@ -103,7 +103,32 @@ System.debug(' Response: ' + res.getBody());
 <img src="media/engageobjectdetail1.png">
 </kbd>
 
-2) Triggers
+2) Triggers - Create a trigger and call it xMattersEngage.  Copy the following code.  The second line references a Webhook that has not been created yet.  You will update this line in step 7 of the xMatters Setup instructions.
+
+```
+trigger xMattersEngage on Engage__c (after insert) {
+    String endpoint = 'https://advisors.na5.xmatters.com/api/integration/1/functions/225fcbe0-f0b5-4e74-bdbd-0368fc03cdaf/triggers?apiKey=d742ef03-dc72-419c-acef-62d76da27750';
+    String caseid = '"Case ID":' + '"' + Trigger.New[0].CaseID__c + '"';
+    String comment = '"Comment":' + '"' + Trigger.New[0].Comments__c + '"';
+    string accountname = '"Account Name":' + '"' + Trigger.New[0].Account_Name__c + '"';
+    string engagetype = '"Type":' + '"' + Trigger.New[0].Collaboration__c + '"';
+    string recipients = '"recipients":' + '"' + Trigger.New[0].Recipients__c + '"';
+    System.debug(caseid);
+    
+    //c = [SELECT Id FROM Case WHERE Id =: '{!Case.Id}'];
+     Case record = [Select CaseNumber From Case Where Id =: Trigger.New[0].CaseID__c];
+    string casenumber = '"Case Number":' + '"' + record.CaseNumber + '"';
+    String payload = '{' + caseid + ',' + comment + ',' + accountname + ',' + casenumber + ',' + engagetype + ',' + recipients + '}';
+    System.Debug(payload);
+    
+    xmattersreq.xRESTCall(endpoint, payload);
+    
+}
+```
+
+<kbd>
+<img src="media/xMattersEngageTrigger.png">
+</kbd>
 
 3) Page Layouts
 
