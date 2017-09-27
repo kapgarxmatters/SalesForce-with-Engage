@@ -81,7 +81,7 @@ System.debug(' Response: ' + res.getBody());
 }
 }
 ```
- 4. In SalesForce, in the Setup Navigation select Create -> Objects.  Create a New Object and label it Engage.
+ 4. In SalesForce, in the Setup Navigation select Create -> Objects.  Create a New Object and label it Engage.  Fill out the other information required for the object and save it.
  
  <kbd>
 <img src="media/engageobject.png">
