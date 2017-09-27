@@ -11,8 +11,9 @@ Transform customer relationships, and your business, using the latest in mobile 
 * [xMattersreq.cls](xMattersreq.cls) - This is the Apex class that executes the Restful Post call into xMatters.
 * [SalesForce-Outbound-Response_IB.js](SalesForce-Outbound-Response_IB.js) - Updates the Assigned user in the Salesforce Case when an xMatters user selects 'Assign to me' *NOTE: User must be have an active license in both xMatters & Salesforce
 * [SalesForce-Inbound_IB.js](SalesForce-Inbound_IB.js) - This recieves the SalesForce payload from the SalesForce Apex Trigger transforms the content (if needed) to be formated for the xMatter New Case Form and creates a new xMatters event. 
-* [SalesForce-Outbound-Delivery_IB.js](SalesForce-Outbound-Delivery_IB.js) - Sends a message back into Salesforce with record of recipient and device
-* [Salesforce.zip](Salesforce.zip) - The comm plan (if needed) that has all the cool scripts and email format and such. 
+* [SalesForce-Outbound-Delivery_IB.js](SalesForce-Outbound-Delivery_IB.js) - Sends a message back into Salesforce with record of recipient and device.
+* [Inbound_Engage.js](Inbound_Engage.js) - This recieves the SalesForce payload from the SalesForce Engage Apex Trigger and transforms the content (if needed) to be formated for the xMatter Engage Form and creates a new xMatters event. 
+* [SalesforceExtended.zip](SalesforceExtended.zip) - The comm plan (if needed) that has all the cool scripts and email format and such. 
 
 # How it works
 When a new SalesForce Case is submitted, SalesForce pushes the information into xMatters.  xMatters kicks off an event and sends the SalesForce case information to the engineer on call.  That engineer has the ability to respond in the xMatters notification.  By accepting the assignment in the xMatters notification, this updates the SalesForce Assignment field.  
