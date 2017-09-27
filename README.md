@@ -189,7 +189,7 @@ sforce.apex.execute("xMattersreq","xRESTCall",{endpoint:endpoint, payload:payloa
 
 
 ## xMatters set up
-1. Import the Salesforce Communication Plan (See Salesforce.zip in files above).  If you use the attached Salesforce Communication Plan you can skip steps 2-4.
+1. Import the Salesforce Communication Plan (See Salesforce.zip in files above).  If you use the attached Salesforce Communication Plan you can skip steps 2-6.
 
 2. Optional - Create an Inbound IB script using the following code or the code from the SalesForce-Inbound_IB.js file.
 ```
@@ -320,16 +320,6 @@ function getUserId( userName ) {
 
 }
 ```
-
-5. In Integration Builder, Configure your Salesforce Endpoint  *NOTE: if you're using a relaxed IP policy, you'll need to add your API token to the end of your Password. For the following information see the SalesForce Setup steps above.
-* At the top navigation bar in SalesForce go to your name > Setup > Personal Setup > My Personal Information > Reset My Security Token.
-* If your password is mypassword, and your security token is XXXXXXXXXX, then you must enter mypasswordXXXXXXXXXX in the xMatters Endpoint to authenticate correctly.
-* Client ID & Client Secret can be found by accessing the connected App in Salesforce.  Setup > 'Quick Find / Search..' box (left side of the screen) > Create > Apps > Find 'Connected Apps' and click on the app (this is the connected app we setup earlier, recommended name is xMatters).  Find Consumer Key (Client ID) and Click to reveal Consumer Secret (Client Secret).
-
-<kbd>
-<img src="media/xmattersendpoint.png">
-</kbd>
-
 6. Add Recipients/Groups to the xMatters New Case Layout.  Login to xMatters with Developer rights.  Click on the Developer tab.  In the SalesForce Communication Plan navigate to the New Case Form.
 
 <kbd>
@@ -431,6 +421,23 @@ exports.xmattersEvent = function(path, payload) {
     }
 }
 ```
+
+7. Update xMatters Endpoints - In Integration Builder, Configure your Salesforce Endpoint  
+*NOTE: if you're using a relaxed IP policy, you'll need to add your API token to the end of your Password. For the following information see the SalesForce Setup steps above.
+* At the top navigation bar in SalesForce go to your name > Setup > Personal Setup > My Personal Information > Reset My Security Token.
+* If your password is mypassword, and your security token is XXXXXXXXXX, then you must enter mypasswordXXXXXXXXXX in the xMatters Endpoint to authenticate correctly.
+* Client ID & Client Secret can be found by accessing the connected App in Salesforce.  Setup > 'Quick Find / Search..' box (left side of the screen) > Create > Apps > Find 'Connected Apps' and click on the app (this is the connected app we setup earlier, recommended name is xMatters).  Find Consumer Key (Client ID) and Click to reveal Consumer Secret (Client Secret).
+
+<kbd>
+<img src="media/xmattersendpoint.png">
+</kbd>
+
+8. Update the SalesForce Engage Trigger and button with the Inbound_Engage URL.  Select URL authentication in the properties.  Copy the URL and use it for step 5 in the SalesForce setup section.
+
+<kbd>
+<img src="media/Inbound_Engage.png">
+</kbd>
+
 
    
 # Testing
